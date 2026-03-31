@@ -425,12 +425,12 @@ async def my_agent(ctx: JobContext):
     # nudger.start()
 
     tavus = __import__("livekit.plugins.tavus", fromlist=["AvatarSession"])
-    avatar = tavus.AvatarSession(
-        replica_id=os.getenv("REPLICA_ID"),
-        persona_id=os.getenv("PERSONA_ID"),
-    )
+    # avatar = tavus.AvatarSession(
+    #     replica_id=os.getenv("REPLICA_ID"),
+    #     persona_id=os.getenv("PERSONA_ID"),
+    # )
 
-    await avatar.start(session, room=ctx.room)
+    # await avatar.start(session, room=ctx.room)
 
     # Start the session, which initializes the voice pipeline and warms up the models
     # Use prompt.txt system_prompt as the base instructions.
