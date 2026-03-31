@@ -22,9 +22,15 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
 
   let courseLessons: any[] = [];
   let currentCourse = null;
+  let courseCurriculum: any[] = [];
   if (lesson.courseId) {
     currentCourse = await Course.findById(lesson.courseId).lean();
     courseLessons = await Lesson.find({ courseId: lesson.courseId }).sort({ createdAt: 1 }).select('title _id').lean();
+    courseCurriculum = ((currentCourse as any)?.curriculum || []).map((item: any) => ({
+      type: item.type,
+      itemId: item.itemId,
+      ...(item.title ? { title: item.title } : {}),
+    }));
   }
 
   const comments = await Comment.find({ lessonId: lesson._id }).sort({ createdAt: -1 }).populate('author', 'name image').lean();
@@ -37,6 +43,7 @@ export default async function LessonPage({ params }: { params: Promise<{ id: str
         lesson={JSON.parse(JSON.stringify(lesson))}
         courseLessons={JSON.parse(JSON.stringify(courseLessons))}
         currentCourse={JSON.parse(JSON.stringify(currentCourse))}
+        courseCurriculum={courseCurriculum}
         comments={JSON.parse(JSON.stringify(comments))}
         canEdit={canEdit}
         userId={session.user.id}

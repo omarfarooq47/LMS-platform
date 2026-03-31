@@ -12,6 +12,15 @@ export async function updateLessonBlocks(lessonId: string, blocks: any[]) {
   await Lesson.findByIdAndUpdate(lessonId, { contentBlocks: blocks });
 }
 
+export async function updateLessonTitle(lessonId: string, title: string) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user) throw new Error("Unauthorized");
+  await connectToDatabase();
+  await Lesson.findByIdAndUpdate(lessonId, { title });
+  const { revalidatePath } = await import('next/cache');
+  revalidatePath(`/lesson/${lessonId}`);
+}
+
 export async function markLessonCompleted(lessonId: string, timeSpent: number) {
   const session = await getServerSession(authOptions);
   if (!session?.user?.id) throw new Error("Unauthorized");
@@ -34,4 +43,22 @@ export async function addComment(lessonId: string, content: string) {
     author: session.user.id,
     lessonId
   });
+}
+
+export async function reorderCourseLessons(courseId: string, lessonIds: string[]) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user) throw new Error("Unauthorized");
+  await connectToDatabase();
+  const { Course } = await import('@/lib/models');
+  await Course.findByIdAndUpdate(courseId, { lessons: lessonIds });
+}
+
+export async function updateCourseCurriculum(courseId: string, curriculum: { type: string; itemId: string; title?: string }[]) {
+  const session = await getServerSession(authOptions);
+  if (!session?.user) throw new Error("Unauthorized");
+  await connectToDatabase();
+  const { Course } = await import('@/lib/models');
+  await Course.findByIdAndUpdate(courseId, { curriculum });
+  const { revalidatePath } = await import('next/cache');
+  revalidatePath(`/course/${courseId}`);
 }

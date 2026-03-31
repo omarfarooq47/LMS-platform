@@ -27,15 +27,15 @@ export default async function CreateNewsPage() {
   return (
     <div className="container mx-auto px-4 py-16 max-w-3xl">
       <div className="text-center mb-10">
-        <h1 className="text-4xl font-extrabold text-indigo-950 tracking-tight">Post School News</h1>
-        <p className="text-slate-500 mt-2">Share announcements or stories with the community.</p>
+        <h1 className="text-4xl font-extrabold text-foreground tracking-tight">Post School News</h1>
+        <p className="text-muted-foreground mt-2">Share announcements or stories with the community.</p>
       </div>
-      <form action={handleCreate} className="space-y-6 bg-white p-10 rounded-3xl shadow-sm border border-slate-100 relative overflow-hidden">
+      <form action={handleCreate} className="space-y-6 bg-card p-10 rounded-3xl shadow-sm border border-border relative overflow-hidden">
         <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl -mr-10 -mt-10" />
         <div className="relative z-10 space-y-6">
           <div>
-            <label className="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">Article Title</label>
-            <Input name="title" required placeholder="e.g. Annual Sports Day 2026" className="h-12 text-lg bg-slate-50 border-emerald-100 focus-visible:ring-emerald-500" />
+            <label className="block text-sm font-bold text-muted-foreground mb-2 uppercase tracking-wider">Article Title</label>
+            <Input name="title" required placeholder="e.g. Annual Sports Day 2026" className="h-12 text-lg" />
           </div>
           <Button type="submit" className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-6 text-lg rounded-xl shadow-md transition-all hover:scale-[1.01]">
             Start Writing

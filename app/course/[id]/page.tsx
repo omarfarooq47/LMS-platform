@@ -54,7 +54,12 @@ export default async function CoursePage({ params }: { params: Promise<{ id: str
     title: course.title,
     description: course.description,
     status: course.status,
-    creator: course.creator ? { name: course.creator.name } : null
+    creator: course.creator ? { name: (course.creator as any).name } : null,
+    curriculum: ((course as any).curriculum || []).map((item: any) => ({
+      type: item.type,
+      itemId: item.itemId,
+      ...(item.title ? { title: item.title } : {}),
+    })),
   };
 
   const safeLessons = lessons.map((l: any) => ({

@@ -3,7 +3,7 @@ import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { User } from "@/lib/models";
 import connectToDatabase from "@/lib/mongodb";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/components/ui-therapy/button";
 import { revalidatePath } from "next/cache";
 
 export default async function StaffApprovalsPage() {

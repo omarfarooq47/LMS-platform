@@ -3,13 +3,16 @@ import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import connectToDatabase from "@/lib/mongodb";
 import { SkillPath } from "@/lib/models";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui-therapy/button";
+import { Input } from "@/components/ui-therapy/input";
+import { Textarea } from "@/components/ui-therapy/textarea";
 
 export default async function CreateSkillPathPage() {
   const session = await getServerSession(authOptions);
-  if (!session?.user?.id || !session.user.isApproved || session.user.role !== 'staff') redirect("/");
+  if (!session?.user?.id) {
+    console.log("No session user id");
+    redirect("/?error=no_session");
+  }
 
   async function handleCreate(formData: FormData) {
     "use server";
@@ -17,12 +20,12 @@ export default async function CreateSkillPathPage() {
     const description = formData.get("description") as string;
     
     await connectToDatabase();
-    await SkillPath.create({
+    const newSkill = await SkillPath.create({
       title,
       description,
       courses: [],
     });
-    redirect(`/skills`);
+    redirect(`/skills/${newSkill._id}`);
   }
 
   return (

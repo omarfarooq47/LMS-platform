@@ -3,10 +3,10 @@ import { authOptions } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { User } from "@/lib/models";
 import connectToDatabase from "@/lib/mongodb";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui-therapy/button";
+import { Input } from "@/components/ui-therapy/input";
+import { Label } from "@/components/ui-therapy/label";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui-therapy/card";
 
 export default async function OnboardingPage() {
   const session = await getServerSession(authOptions);

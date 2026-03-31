@@ -12,25 +12,25 @@ export default async function CoursesPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="mb-12 text-center max-w-2xl mx-auto">
-        <h1 className="text-4xl font-extrabold text-indigo-950 mb-4 tracking-tight">All Courses</h1>
-        <p className="text-lg text-slate-600 leading-relaxed">
+        <h1 className="text-4xl font-extrabold text-foreground mb-4 tracking-tight">All Courses</h1>
+        <p className="text-lg text-muted-foreground leading-relaxed">
           Browse our extensive catalog of interactive courses covering a variety of topics.
         </p>
       </div>
 
       {courses.length === 0 ? (
-        <div className="text-center py-20 bg-white rounded-3xl border border-dashed border-slate-300">
-           <span className="text-5xl text-slate-300 block mb-4">📚</span>
-           <p className="text-xl text-slate-500 font-medium">No courses available yet.</p>
+        <div className="text-center py-20 rounded-3xl border border-dashed border-border">
+           <span className="text-5xl text-muted-foreground block mb-4">📚</span>
+           <p className="text-xl text-muted-foreground font-medium">No courses available yet.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {courses.map((course: any) => (
             <Link href={`/course/${course._id.toString()}`} key={course._id.toString()}>
-              <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all border border-slate-100 flex flex-col h-full group cursor-pointer relative">
+              <div className="bg-card rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all border border-border flex flex-col h-full group cursor-pointer relative">
                 
                 {/* Course Image Placeholder */}
-                <div className="h-40 bg-slate-100 relative overflow-hidden">
+                <div className="h-40 bg-muted relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/20 to-emerald-500/20 mix-blend-multiply group-hover:scale-105 transition-transform duration-500" />
                   <div className="absolute inset-0 flex items-center justify-center text-4xl opacity-50">🎓</div>
                 </div>
@@ -48,17 +48,17 @@ export default async function CoursesPage() {
                     )}
                   </div>
                   
-                  <h2 className="text-xl font-bold text-indigo-950 mb-2 group-hover:text-indigo-700 transition-colors line-clamp-2">
+                  <h2 className="text-xl font-bold text-foreground mb-2 group-hover:text-indigo-700 transition-colors line-clamp-2">
                     {course.title}
                   </h2>
                   
-                  <p className="text-slate-600 text-sm mb-4 line-clamp-2 flex-grow">
+                  <p className="text-muted-foreground text-sm mb-4 line-clamp-2 grow">
                     {course.description}
                   </p>
                   
-                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-50 text-xs font-medium text-slate-500">
+                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-border text-xs font-medium text-muted-foreground">
                     <span className="truncate max-w-[120px]">By {course.creator?.name || 'Staff'}</span>
-                    <span className="capitalize text-slate-400">{course.status}</span>
+                    <span className="capitalize text-muted-foreground">{course.status}</span>
                   </div>
                 </div>
               </div>

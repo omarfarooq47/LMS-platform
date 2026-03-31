@@ -33,17 +33,30 @@ const LessonSchema = new Schema({
 }, { timestamps: true });
 
 // Course Schema
+const sectionSchema = new Schema({
+  title: { type: String, required: true },
+  lessonIds: [{ type: Schema.Types.ObjectId, ref: 'Lesson' }],
+}, { _id: true });
+
+const curriculumItemSchema = new Schema({
+  type: { type: String, enum: ['lesson', 'section'], required: true },
+  itemId: { type: String, required: true }, // lesson _id or UUID for sections
+  title: { type: String }, // only used for section items
+}, { _id: false });
+
 const CourseSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   creator: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   pathId: { type: Schema.Types.ObjectId, ref: 'SkillPath' },
-  status: { 
-    type: String, 
+  status: {
+    type: String,
     enum: ['confirmed', 'initialized', '50% content', '100% content', 'blocked', 'reviewed', 'incorporated', 'published', 'canceled'],
     default: 'initialized'
   },
   lessons: [{ type: Schema.Types.ObjectId, ref: 'Lesson' }],
+  sections: { type: [sectionSchema], default: [] },
+  curriculum: { type: [curriculumItemSchema], default: [] },
   coverDiagram: { type: Schema.Types.Mixed },
 }, { timestamps: true });
 
@@ -52,6 +65,7 @@ const SkillPathSchema = new Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
   courses: [{ type: Schema.Types.ObjectId, ref: 'Course' }],
+  creator: { type: Schema.Types.ObjectId, ref: 'User', required: true },
   books: [{ type: Schema.Types.Mixed }],
 }, { timestamps: true });
 
