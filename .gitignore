@@ -1,10 +1,22 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# agent dependencies
+*.env
+*.env.*
+!.env.example
+*.DS_Store
+*__pycache__
+*.idea
+*KMS
+*.venv
+*.vscode
+*.egg-info
+*.pytest_cache
+*.ruff_cache
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.*
-.yarn/*
+# web dependencies
+*/node_modules
+*/.pnp
+*.pnp.*
+*.yarn/*
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
@@ -14,11 +26,11 @@
 /coverage
 
 # next.js
-/.next/
-/out/
+school-platform/.next/
+school-platform/out/
 
 # production
-/build
+school-platform/build
 
 # misc
 .DS_Store
