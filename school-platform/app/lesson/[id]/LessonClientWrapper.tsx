@@ -18,6 +18,7 @@ export function LessonClientWrapper({
   courseLessons, 
   currentCourse,
   courseCurriculum,
+  newsItems,
   comments, 
   canEdit,
   userId
@@ -159,7 +160,7 @@ export function LessonClientWrapper({
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 pb-32">
-      {/* Left Sidebar */}
+      {/* Left Sidebar — Course */}
       {currentCourse && (
         <div className="w-full lg:w-80 shrink-0">
           <div className="bg-card rounded-3xl shadow-sm border border-border sticky top-24 overflow-hidden">
@@ -300,6 +301,45 @@ export function LessonClientWrapper({
                       </div>
                     )}
                   </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Left Sidebar — News */}
+      {!currentCourse && newsItems && newsItems.length > 0 && (
+        <div className="w-full lg:w-80 shrink-0">
+          <div className="bg-card rounded-3xl shadow-sm border border-border sticky top-24 overflow-hidden">
+            {/* Sidebar header */}
+            <div className="p-6 bg-primary text-primary-foreground relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/20 rounded-full blur-2xl -mr-10 -mt-10" />
+              <Link href="/news" className="relative z-10 inline-flex items-center gap-2 text-primary-foreground/70 hover:text-primary-foreground text-sm font-medium mb-4 transition-colors">
+                <ChevronLeft className="w-4 h-4" /> All News
+              </Link>
+              <h3 className="relative z-10 font-bold text-xl leading-snug">School News & Articles</h3>
+            </div>
+            {/* News list */}
+            <div className="max-h-[calc(100vh-350px)] overflow-y-auto custom-scrollbar divide-y divide-border">
+              {newsItems.map((item: any) => {
+                const isActive = item._id === lesson._id;
+                return (
+                  <Link
+                    key={item._id}
+                    href={`/lesson/${item._id}`}
+                    className={`flex items-start gap-3 p-4 transition-all border-l-4 ${isActive ? 'bg-primary/5 border-l-primary' : 'hover:bg-muted border-l-transparent'}`}
+                  >
+                    <span className="text-xl shrink-0 mt-0.5">📰</span>
+                    <div className="min-w-0">
+                      <p className={`text-sm font-semibold line-clamp-2 leading-snug ${isActive ? 'text-foreground' : 'text-muted-foreground'}`}>
+                        {item.title}
+                      </p>
+                      <p className="text-xs text-muted-foreground mt-1">
+                        {new Date(item.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
+                      </p>
+                    </div>
+                  </Link>
                 );
               })}
             </div>

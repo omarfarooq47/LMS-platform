@@ -15,7 +15,7 @@ from livekit.agents import (
     inference,
     room_io,
 )
-from livekit.plugins import noise_cancellation, silero, elevenlabs
+from livekit.plugins import noise_cancellation, silero, elevenlabs, liveavatar
 from livekit.plugins.turn_detector.multilingual import MultilingualModel
 
 logger = logging.getLogger("agent")
@@ -54,7 +54,7 @@ current_llm_model = "openai/gpt-4o"
 #   - OR inference.TTS(model="elevenlabs/eleven_turbo_v2_5", voice="<voice_id>")
 # Passing a colon-delimited model into inference.TTS(model=...) will be treated
 # as the *model id* and can cause "model not found" errors.
-current_tts_model = "elevenlabs/eleven_turbo_v2_5:iP95p4xoKVk53GoZ742B"
+current_tts_model = "elevenlabs/eleven_turbo_v2_5:JBFqnCBsd6RMkjVDRZzb"
 
 
 def _parse_inference_tts_descriptor(value: str | None) -> tuple[str, str] | None:
@@ -407,7 +407,7 @@ async def my_agent(ctx: JobContext):
         tts=(
             (lambda mv: inference.TTS(model=mv[0], voice=mv[1]))(
                 _parse_inference_tts_descriptor(current_tts_model)
-                or ("elevenlabs/eleven_turbo_v2_5", "iP95p4xoKVk53GoZ742B")
+                or ("elevenlabs/eleven_turbo_v2_5", "JBFqnCBsd6RMkjVDRZzb")
             )
         ),
         turn_detection=MultilingualModel(),
@@ -429,8 +429,10 @@ async def my_agent(ctx: JobContext):
     #     replica_id=os.getenv("REPLICA_ID"),
     #     persona_id=os.getenv("PERSONA_ID"),
     # )
-
-    # await avatar.start(session, room=ctx.room)
+    avatar = liveavatar.AvatarSession(
+      avatar_id="7b888024-f8c9-4205-95e1-78ce01497bda",  # ID of the LiveAvatar avatar to use
+   )
+    await avatar.start(session, room=ctx.room)
 
     # Start the session, which initializes the voice pipeline and warms up the models
     # Use prompt.txt system_prompt as the base instructions.

@@ -35,8 +35,8 @@ export function App({ appConfig }: AppProps) {
     'google/gemini-2.5-flash'
   );
   const [selectedTtsModel, setSelectedTtsModel] = useState<
-    'deepgram/aura-2:odysseus' | 'elevenlabs/eleven_turbo_v2_5:iP95p4xoKVk53GoZ742B' | 'elevenlabs/eleven_turbo_v2_5:IKne3meq5aSn9XLyUdCD'
-  >('elevenlabs/eleven_turbo_v2_5:iP95p4xoKVk53GoZ742B');
+    'deepgram/aura-2:odysseus' | 'elevenlabs/eleven_turbo_v2_5:JBFqnCBsd6RMkjVDRZzb' | 'elevenlabs/eleven_turbo_v2_5:TX3LPaxmHKxFdv7VOQHJ'
+  >('elevenlabs/eleven_turbo_v2_5:TX3LPaxmHKxFdv7VOQHJ');
   const openRequestIdRef = useRef<string | null>(null);
 
   const tokenSource = useMemo(() => {
@@ -263,17 +263,17 @@ export function App({ appConfig }: AppProps) {
                   onChange={(e) =>
                     setSelectedTtsModel(
                       e.target.value as
-                        | 'elevenlabs/eleven_turbo_v2_5:IKne3meq5aSn9XLyUdCD'
-                        | 'elevenlabs/eleven_turbo_v2_5:iP95p4xoKVk53GoZ742B'
+                        | 'elevenlabs/eleven_turbo_v2_5:TX3LPaxmHKxFdv7VOQHJ'
+                        | 'elevenlabs/eleven_turbo_v2_5:JBFqnCBsd6RMkjVDRZzb'
                     )
                   }
                 >
                   {/* <option value="deepgram/aura-2:odysseus">deepgram/aura-2:odysseus</option> */}
-                  <option value="elevenlabs/eleven_turbo_v2_5:iP95p4xoKVk53GoZ742B">
-                    elevenlabs - Chris
+                  <option value="elevenlabs/eleven_turbo_v2_5:JBFqnCBsd6RMkjVDRZzb">
+                    elevenlabs - George
                   </option>
-                  <option value="elevenlabs/eleven_turbo_v2_5:IKne3meq5aSn9XLyUdCD">
-                    elevenlabs - Charlie
+                  <option value="elevenlabs/eleven_turbo_v2_5:TX3LPaxmHKxFdv7VOQHJ">
+                    elevenlabs - Callum
                   </option>
                 </select>
               </label>

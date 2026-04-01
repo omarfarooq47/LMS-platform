@@ -10,6 +10,33 @@ import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { Trash2, ArrowUp, ArrowDown, Video, Type, Image as ImageIcon, Save, Eye, Edit2, Check } from 'lucide-react';
 import { CourseDiagram } from './CourseDiagram';
+import { CodeBlock } from '@/components/ui/CodeBlock';
+
+// Custom renderers for react-markdown
+const markdownComponents: React.ComponentProps<typeof ReactMarkdown>['components'] = {
+  // Fenced code blocks  (```lang ... ```)
+  code({ node, className, children, ...props }: any) {
+    const match = /language-(\w+)/.exec(className || '');
+    const isBlock = !props.inline;
+    if (isBlock) {
+      return (
+        <CodeBlock
+          code={String(children).replace(/\n$/, '')}
+          lang={match?.[1] ?? 'text'}
+        />
+      );
+    }
+    // Inline code
+    return (
+      <code
+        className="bg-muted text-primary font-mono text-[0.85em] px-1.5 py-0.5 rounded-md border border-border"
+        {...props}
+      >
+        {children}
+      </code>
+    );
+  },
+};
 
 export function LessonEditor({ 
   initialBlocks, 
@@ -140,9 +167,9 @@ export function LessonEditor({
                     />
                   </div>
                 ) : (
-                  <div className="prose prose-lg max-w-none prose-headings:font-bold prose-a:text-primary prose-img:rounded-2xl prose-img:shadow-md py-2">
+                  <div className="prose prose-lg prose-invert:dark max-w-none py-2">
                     {block.data
-                      ? <ReactMarkdown remarkPlugins={[remarkGfm]}>{block.data}</ReactMarkdown>
+                      ? <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>{block.data}</ReactMarkdown>
                       : <span className="text-muted-foreground italic text-sm">Empty text block — click ✏️ to edit</span>
                     }
                   </div>
