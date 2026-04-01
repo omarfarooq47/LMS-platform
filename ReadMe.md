@@ -1,1 +1,1 @@
-docker buildx build --platform linux/amd64,linux/arm64 --tag ot-web:hero .
+docker buildx build --no-cache --platform linux/amd64,linux/arm64 --tag ot-web:hero .
