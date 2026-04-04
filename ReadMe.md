@@ -1,1 +1,5 @@
-docker buildx build --no-cache --platform linux/amd64,linux/arm64 --tag ot-web:hero .
+docker buildx build --platform linux/amd64,linux/arm64 --tag oaktree.azurecr.io/ot-web:jelus .
+
+docker run -it --name web 3000:3000 ot-web:hero
+
+--no-cache

@@ -84,6 +84,21 @@ const UserProgressSchema = new Schema({
   timeSpent: { type: Number, default: 0 },
 }, { timestamps: true });
 
+// Book Schema (Library)
+const BookSchema = new Schema({
+  title: { type: String, required: true },
+  author: { type: String, required: true },
+  description: { type: String, default: '' },
+  addedBy: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  status: { type: String, enum: ['available', 'lended'], default: 'available' },
+  borrowedBy: { type: Schema.Types.ObjectId, ref: 'User', default: null },
+  borrowerPhone: { type: String, default: '' },
+  borrowerAddress: { type: String, default: '' },
+  borrowerIdNumber: { type: String, default: '' },
+  borrowDate: { type: Date, default: null },
+  returnDate: { type: Date, default: null },
+}, { timestamps: true });
+
 export const User = models.User || model('User', UserSchema);
 export const Notice = models.Notice || model('Notice', NoticeSchema);
 export const Lesson = models.Lesson || model('Lesson', LessonSchema);
@@ -91,3 +106,4 @@ export const Course = models.Course || model('Course', CourseSchema);
 export const SkillPath = models.SkillPath || model('SkillPath', SkillPathSchema);
 export const Comment = models.Comment || model('Comment', CommentSchema);
 export const UserProgress = models.UserProgress || model('UserProgress', UserProgressSchema);
+export const Book = models.Book || model('Book', BookSchema);

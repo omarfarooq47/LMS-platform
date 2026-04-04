@@ -161,13 +161,13 @@ export function LessonEditor({
                     <Textarea 
                       value={block.data} 
                       onChange={(e) => updateBlock(block.id, e.target.value)} 
-                      className="min-h-50 font-mono text-sm bg-card shadow-inner focus:border-primary focus:ring-1 focus:ring-primary p-4 rounded-xl leading-relaxed"
+                      className="min-h-50 font-mono text-sm bg-card shadow-inner focus:border-primary focus:ring-1 focus:ring-primary p-4 rounded-xl leading-relaxed noto-sans-arabic-oaktree"
                       placeholder="# Heading 1&#10;Type markdown content here..."
                       autoFocus
                     />
                   </div>
                 ) : (
-                  <div className="prose prose-lg prose-invert:dark max-w-none py-2">
+                  <div className="prose prose-lg prose-invert:dark max-w-none py-2 noto-sans-arabic-oaktree">
                     {block.data
                       ? <ReactMarkdown remarkPlugins={[remarkGfm]} components={markdownComponents}>{block.data}</ReactMarkdown>
                       : <span className="text-muted-foreground italic text-sm">Empty text block — click ✏️ to edit</span>

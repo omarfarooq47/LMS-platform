@@ -37,6 +37,9 @@ export function Navbar() {
             <Link href="/news" className="hover:text-emerald-600 transition-colors">News</Link>
             <Link href="/courses" className="hover:text-emerald-600 transition-colors">Courses</Link>
             <Link href="/skills" className="hover:text-emerald-600 transition-colors">Skill Paths</Link>
+            {session?.user?.isApproved && (
+              <Link href="/library" className="hover:text-emerald-600 transition-colors">Library</Link>
+            )}
             <Link href="/about" className="hover:text-emerald-600 transition-colors">About</Link>
             <Link href="/checkin" className="hover:text-emerald-600 transition-colors">CheckIn</Link>
           </div>
