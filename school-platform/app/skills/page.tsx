@@ -57,7 +57,11 @@ export default async function SkillsPage() {
                 <h2 className="text-2xl font-bold text-foreground mb-3 group-hover:text-emerald-400 transition-colors">{path.title}</h2>
                 <p className="text-muted-foreground leading-relaxed mb-6 grow">{path.description}</p>
                 <div className="flex items-center justify-between mt-auto pt-6 border-t border-border">
-                  <span className="text-sm font-semibold text-muted-foreground">{path.courses?.length || 0} Courses</span>
+                  <div className="flex items-center gap-3 text-sm font-semibold text-muted-foreground">
+                    <span>{path.courses?.length || 0} Courses</span>
+                    {(path.books?.length || 0) > 0 && <span>· {path.books.length} Books</span>}
+                    {(path.newsItems?.length || 0) > 0 && <span>· {path.newsItems.length} Articles</span>}
+                  </div>
                   <span className="text-emerald-400 font-medium text-sm flex items-center gap-1 group-hover:gap-2 transition-all">
                     Explore <span aria-hidden="true">&rarr;</span>
                   </span>

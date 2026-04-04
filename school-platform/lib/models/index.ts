@@ -66,7 +66,8 @@ const SkillPathSchema = new Schema({
   description: { type: String, required: true },
   courses: [{ type: Schema.Types.ObjectId, ref: 'Course' }],
   creator: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-  books: [{ type: Schema.Types.Mixed }],
+  books: [{ type: Schema.Types.ObjectId, ref: 'Book' }],
+  newsItems: [{ type: Schema.Types.ObjectId, ref: 'Lesson' }],
 }, { timestamps: true });
 
 // Comment Schema
